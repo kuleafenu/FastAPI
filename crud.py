@@ -10,7 +10,7 @@ def get_basic_info(db: Session, id: int):
         raise HTTPException(status_code=400, detail="BasicInfo not found.")
     return basic_info
 
-# get single basic_info by email
+# get single basic_info by Email
 def get_basic_info_by_email(db: Session, email: str):
     return db.query(models.BasicInfo).filter(models.BasicInfo.email == email).first()
 
