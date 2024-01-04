@@ -7,17 +7,10 @@ from jose import JWTError, jwt
 from passlib.context import CryptContext
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
-from dependencies import get_db
-import models, schemas
-from config import Settings
+from backend.dependencies import get_db
+from backend import models, schemas
+from backend.config import Settings
 from functools import lru_cache
-
-# to get a string like this run:
-# openssl rand -hex 32
-# SECRET_KEY = settings.secret_key
-# ALGORITHM = settings.algorithm
-
-ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
 
 
@@ -89,7 +82,7 @@ def create_access_token(data: dict, settings: Annotated[Settings, Depends(get_se
     if expires_delta:
         expire = datetime.utcnow() + expires_delta
     else:
-        expire = datetime.utcnow() + timedelta(minutes=15)
+        expire = datetime.utcnow() + timedelta(minutes=settings.access_token_expire_minutes)
     to_encode.update({"exp": expire})
     encoded_jwt = jwt.encode(to_encode, settings.secret_key, algorithm=settings.algorithm)
     return encoded_jwt

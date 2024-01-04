@@ -1,10 +1,10 @@
 from fastapi import APIRouter, Depends, HTTPException
 
-from dependencies import get_db
-from database import engine
+from backend.dependencies import get_db
+from backend.database import engine
 
-import models, schemas, authentication
-from authentication import *
+from backend import models, schemas, authentication
+from backend.authentication  import *
 from sqlalchemy.orm import Session
 models.Base.metadata.create_all(bind=engine)
 from typing import Any

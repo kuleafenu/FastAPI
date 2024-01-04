@@ -1,8 +1,8 @@
 from fastapi import Depends, FastAPI
-from routers import academic_records_router, users_router, visa_details_router, authentication_router, users_router, basic_information_router
+from backend.routers import academic_records_router, users_router, visa_details_router, authentication_router, users_router, basic_information_router
 
-from dependencies import get_db
-from internal import admin
+from backend.dependencies import get_db
+from backend.internal import admin
 
 app = FastAPI(
     title="International Students Tracker",
